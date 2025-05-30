@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>鲁迅生平可视化系统</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+  </head>
+  <body>
+    <div class="page-background"></div>
+    <!-- 全屏背景 -->
+
+    <div id="container">
+      <div id="header">
+        <h1>鲁迅生平可视化系统</h1>
+        <p>1881-1936 | 中国现代文学的奠基人</p>
+      </div>
+
+      <div id="info-panel">
+        <h3>系统说明</h3>
+        <p>
+          本系统通过时钟隐喻展示鲁迅先生生平重要事件，指针转动一圈代表鲁迅先生的一生（5分钟）。
+        </p>
+
+        <div class="quote">
+          "横眉冷对千夫指，俯首甘为孺子牛。"<br />
+          —— 鲁迅《自嘲》
+        </div>
+
+        <h3>重要事件</h3>
+        <div class="timeline-event">
+          <h4>1881年：诞生</h4>
+          <p>出生于浙江绍兴府会稽县</p>
+        </div>
+        <div class="timeline-event">
+          <h4>1906年：弃医从文</h4>
+          <p>在仙台医学专门学校退学，决心以文学改变国民精神</p>
+        </div>
+        <div class="timeline-event">
+          <h4>1918年：发表《狂人日记》</h4>
+          <p>中国现代文学史上第一篇白话小说</p>
+        </div>
+      </div>
+
+      <div id="timeline"></div>
+
+      <div class="controls">
+        <button id="playPause">播放</button>
+        <button id="reset">重置</button>
+        <button id="skip">跳过介绍</button>
+      </div>
+
+      <div id="footer">鲁迅生平可视化系统 © 2023 | 纪念中国现代文学奠基人</div>
+    </div>
+
+    <div id="videoContainer" class="video-container">
+      <span class="video-close" onclick="closeVideo()">×</span>
+      <video class="video-player" id="mainVideo"></video>
+    </div>
+
+    <script src="scripts.js"></script>
+  </body>
+</html>

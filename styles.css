@@ -1,0 +1,216 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #f5f2e0;
+  font-family: "SimSun", "宋体", serif;
+  /* overflow: hidden; */
+  position: relative;
+}
+
+.page-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("./src/image/背景图1.png") center/cover; /* 本地背景图路径 */
+  opacity: 0.2;
+  z-index: -1;
+}
+
+#header {
+  text-align: center;
+  padding: 15px 0;
+  background: rgba(120, 30, 30, 0.8);
+  color: #f5f2e0;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  width: 500px;
+  border-radius: 20px;
+}
+
+#header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  letter-spacing: 5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#header p {
+  margin: 5px 0 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* min-height: 100vh; */
+}
+
+#timeline {
+  margin: 20px 0;
+  position: relative;
+}
+
+.clock-face {
+  fill: rgba(255, 255, 255, 0.8);
+  stroke: #781e1e;
+  stroke-width: 3;
+}
+
+.pointer {
+  fill: #c00;
+  stroke: #500;
+  stroke-width: 1;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.pointer:hover {
+  fill: #e00;
+}
+
+.event-dot {
+  fill: #781e1e;
+  cursor: pointer;
+  stroke: #f5f2e0;
+  stroke-width: 2;
+}
+
+.work-annotation {
+  stroke: #09f;
+}
+.relation-annotation {
+  stroke: #f90;
+}
+
+.annotation-text {
+  font-family: "SimSun", serif;
+  font-size: 16px;
+  fill: #333;
+  text-anchor: middle;
+}
+
+.controls {
+  margin: 20px 0;
+  display: flex;
+  gap: 15px;
+}
+
+.video-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 0;
+  height: 0;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+  transition: all 0.5s ease-out;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.video-container.active {
+  width: 80vw;
+  height: 80vh;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.video-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 24px;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+button {
+  padding: 12px 25px;
+  background: #781e1e;
+  color: #f5f2e0;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: "SimSun", serif;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background: #9c2a2a;
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+#info-panel {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 300px;
+  background: rgba(245, 242, 224, 0.9);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-left: 5px solid #781e1e;
+}
+
+#info-panel h3 {
+  margin-top: 0;
+  color: #781e1e;
+  border-bottom: 2px solid #781e1e;
+  padding-bottom: 10px;
+}
+
+#info-panel p {
+  line-height: 1.6;
+  color: #333;
+}
+
+.quote {
+  font-style: italic;
+  padding: 10px;
+  border-left: 3px solid #781e1e;
+  background: rgba(120, 30, 30, 0.1);
+  margin: 15px 0;
+}
+
+.timeline-event {
+  margin: 15px 0;
+  padding-left: 15px;
+  border-left: 2px solid #9c2a2a;
+}
+
+.timeline-event h4 {
+  margin: 5px 0;
+  color: #781e1e;
+}
+
+.timeline-event p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+}
+
+#footer {
+  margin-top: 20px;
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  padding: 10px;
+  width: 100%;
+  background: rgba(120, 30, 30, 0.1);
+}
