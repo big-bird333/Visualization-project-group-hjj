@@ -8,19 +8,62 @@ const DURATION = 6000; // 测试写快一点
   // 从 JSON 文件加载数据
   const response = await fetch("./src/eventData.json");
   const timelineData = await response.json();
-  clock = drawClock(timelineData);
+  [svg, clock] = drawClock(timelineData);
 
   // ======== 播放相关操作 ========
   const eventsContainer = d3.select("#events-container");
 
-  // 三角形指针
+  // 指针
   const pointer = clock
     .append("path")
     .attr("class", "pointer")
     .attr("d", "M-7.5,-230 L0,-250 L7.5,-230 Z");
 
-  // 播放控制参数
+  // 设置指针的拖拽操作
+  // 拖拽状态下只更新视觉指针
+  let pendingProgress = null;
 
+  // 节流操作，我发现不节流的话渲染 rotate 的时候非常卡顿
+  function throttle(fn, delay) {
+    let lastCall = 0;
+    return function (...args) {
+      const now = Date.now();
+      if (now - lastCall >= delay) {
+        lastCall = now;
+        fn.apply(this, args);
+      }
+    };
+  }
+
+  // 拖拽处理函数
+  const throttledDragHandler = throttle((event) => {
+    const [mx, my] = d3.pointer(event, svg.node());
+    const dx = mx - WIDTH / 2;
+    const dy = my - HEIGHT / 2;
+    let angle = Math.atan2(dx, -dy) * (180 / Math.PI);
+    if (angle < 0) angle += 360;
+    const t = angle / 360;
+
+    pointer.attr("transform", `rotate(${angle})`);
+    pendingProgress = t;
+  }, 50); // 每 50ms 最多执行一次
+
+  pointer.call(
+    d3
+      .drag()
+      .on("start", () => {
+        if (isPlaying) pause();
+      })
+      .on("drag", throttledDragHandler)
+      .on("end", () => {
+        if (pendingProgress !== null) {
+          seekTo(pendingProgress);
+          pendingProgress = null;
+        }
+      })
+  );
+
+  // 播放控制参数
   let isPlaying = false;
   let currentProgress = 0;
   let timer;
@@ -164,7 +207,6 @@ function getPosition(angle, radius) {
 
 // ======== 画钟 ========
 function drawClock(timelineData) {
-  // ======== 画钟 ========
   const svg = d3
     .select("#timeline")
     .append("svg")
@@ -223,7 +265,7 @@ function drawClock(timelineData) {
       .attr("data-time", event.time);
   });
 
-  return clock;
+  return [svg, clock];
 }
 
 // 视频播放功能
