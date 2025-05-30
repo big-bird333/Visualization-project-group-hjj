@@ -4,22 +4,112 @@
     <meta charset="UTF-8" />
     <title>鲁迅生平可视化系统</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div class="page-background"></div>
     <!-- 全屏背景 -->
+    <div class="page-background"></div>
 
     <div id="container">
       <div id="header">
-        <h1>鲁迅生平可视化系统</h1>
-        <p>1881-1936 | 中国现代文学的奠基人</p>
+        <h1>鲁迅先生可视化传记</h1>
+        <div class="controls">
+          <button id="togglePrev">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-skip-back-icon lucide-skip-back"
+            >
+              <polygon points="19 20 9 12 19 4 19 20" />
+              <line x1="5" x2="5" y1="19" y2="5" />
+            </svg>
+          </button>
+          <button id="togglePlayPause">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-pause-icon lucide-pause"
+            >
+              <rect x="14" y="4" width="4" height="16" rx="1" />
+              <rect x="6" y="4" width="4" height="16" rx="1" />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-step-forward-icon lucide-step-forward"
+            >
+              <line x1="6" x2="6" y1="4" y2="20" />
+              <polygon points="10,4 20,12 10,20" />
+            </svg>
+          </button>
+          <button id="toggleNext">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-skip-forward-icon lucide-skip-forward"
+            >
+              <polygon points="5 4 15 12 5 20 5 4" />
+              <line x1="19" x2="19" y1="5" y2="19" />
+            </svg>
+          </button>
+          <button id="toggleReplay">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-rotate-ccw-icon lucide-rotate-ccw"
+            >
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+              <path d="M3 3v5h5" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       <div id="info-panel">
         <h3>系统说明</h3>
         <p>
-          本系统通过时钟隐喻展示鲁迅先生生平重要事件，指针转动一圈代表鲁迅先生的一生（5分钟）。
+          本系统通过时钟隐喻展示鲁迅先生生平重要事件，指针转动一圈代表鲁迅先生的一生
         </p>
 
         <div class="quote">
@@ -28,7 +118,7 @@
         </div>
 
         <h3>重要事件</h3>
-        <div class="timeline-event">
+        <!-- <div class="timeline-event">
           <h4>1881年：诞生</h4>
           <p>出生于浙江绍兴府会稽县</p>
         </div>
@@ -39,23 +129,18 @@
         <div class="timeline-event">
           <h4>1918年：发表《狂人日记》</h4>
           <p>中国现代文学史上第一篇白话小说</p>
-        </div>
+        </div> -->
+        <div id="events-container"></div>
       </div>
 
       <div id="timeline"></div>
-
-      <div class="controls">
-        <button id="playPause">播放</button>
-        <button id="reset">重置</button>
-        <button id="skip">跳过介绍</button>
+      <div id="video-area">
+        <button id="playBtn" onclick="showVideo()">Play</button>
+        <video id="myVideo" controls>
+          <source src="./src/video/video.mp4" type="video/mp4" />
+        </video>
+        <button id="closeBtn" onclick="closeVideo()">Close</button>
       </div>
-
-      <div id="footer">鲁迅生平可视化系统 © 2023 | 纪念中国现代文学奠基人</div>
-    </div>
-
-    <div id="videoContainer" class="video-container">
-      <span class="video-close" onclick="closeVideo()">×</span>
-      <video class="video-player" id="mainVideo"></video>
     </div>
 
     <script src="scripts.js"></script>

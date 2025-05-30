@@ -1,0 +1,56 @@
+[
+  {
+    "time": 0,
+    "type": "event",
+    "title": "诞生",
+    "year": 1881,
+    "description": "出生于浙江绍兴府会稽县"
+  },
+  {
+    "time": 0.15,
+    "type": "event",
+    "title": "南京求学",
+    "year": 1898,
+    "description": "入江南水师学堂，后转入矿务铁路学堂"
+  },
+  {
+    "time": 0.25,
+    "duration": 8,
+    "type": "event",
+    "title": "日本留学",
+    "year": 1902,
+    "description": "赴日本留学，入东京弘文学院"
+  },
+  {
+    "time": 0.35,
+    "duration": 8,
+    "type": "work",
+    "title": "狂人日记",
+    "year": 1918,
+    "description": "写下《狂人日记》"
+  },
+  {
+    "time": 0.45,
+    "duration": 8,
+    "type": "work",
+    "title": "阿Q正传",
+    "year": 1921,
+    "description": "鲁迅最著名的中篇小说"
+  },
+  {
+    "time": 0.75,
+    "duration": 8,
+    "type": "event",
+    "title": "左联成立",
+    "year": 1930,
+    "description": "参与发起中国左翼作家联盟"
+  },
+  {
+    "time": 0.9,
+    "duration": 8,
+    "type": "event",
+    "title": "逝世",
+    "year": 1936,
+    "description": "在上海病逝，享年55岁"
+  }
+]
