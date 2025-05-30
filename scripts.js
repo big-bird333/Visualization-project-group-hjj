@@ -20,8 +20,6 @@ const DURATION = 6000; // 测试写快一点
     .attr("d", "M-7.5,-230 L0,-250 L7.5,-230 Z");
 
   // 设置指针的拖拽操作
-  // 拖拽状态下只更新视觉指针
-  let pendingProgress = null;
 
   // 节流操作，我发现不节流的话渲染 rotate 的时候非常卡顿
   function throttle(fn, delay) {
@@ -45,8 +43,8 @@ const DURATION = 6000; // 测试写快一点
     const t = angle / 360;
 
     pointer.attr("transform", `rotate(${angle})`);
-    pendingProgress = t;
-  }, 50); // 每 50ms 最多执行一次
+    seekTo(t);
+  }, 100); // 每 50ms 最多执行一次
 
   pointer.call(
     d3
@@ -55,12 +53,6 @@ const DURATION = 6000; // 测试写快一点
         if (isPlaying) pause();
       })
       .on("drag", throttledDragHandler)
-      .on("end", () => {
-        if (pendingProgress !== null) {
-          seekTo(pendingProgress);
-          pendingProgress = null;
-        }
-      })
   );
 
   // 播放控制参数
@@ -80,10 +72,10 @@ const DURATION = 6000; // 测试写快一点
       const eventDiv = eventsContainer
         .append("div")
         .attr("class", "timeline-event")
-        .style("opacity", 0);
+        // .style("opacity", 0);
       eventDiv.append("h4").text(`${event.year}年：${event.title}`);
       eventDiv.append("p").text(event.description);
-      eventDiv.transition().duration(500).style("opacity", 1);
+      // eventDiv.transition().duration(500).style("opacity", 1);
     },
   }));
   console.log(thresholdCallbacks);
